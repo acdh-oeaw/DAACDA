@@ -1,0 +1,76 @@
+{% extends "webpage/base.html" %}
+{% block Titel %}List Bomber Crews{% endblock %}
+
+{% block scriptHeader %}<!--leafletjs -->
+    {% load render_table from django_tables2 %}
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <style>
+            #map { height: 500px; }
+        </style>
+{% endblock %}
+{% block content %}
+
+<div class="panel panel-default panel-fixed" >
+    <div class="panel-heading" style="text-align:center;">
+        <h3>Bomber Crews <br/>
+        <small>{{ person_nr }} Persons</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-default panel-fixed">
+                    <div class="panel-heading" style="text-align:center;">
+                        <h3>Bomber Crews</h3>
+                    </div>
+                    <div class="panel-body">    
+                        {% render_table table %}
+                    </div>
+                </div>
+            </div>
+        <div class="col-md-6">
+            <div class="panel panel-default panel-fixed">
+                <div class="panel-heading" style="text-align:center;">
+                    <h3>Crews' Destiny</h3>
+                </div>
+                <div class="panel-body">    
+                    <div id="donut" style="height: 400px"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+    $(function () {
+    $('#donut').highcharts({
+        chart: {
+            width: 500,
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45
+            }
+        },
+        title: {
+            text: 'Destiny of the Crew Members'
+        },
+        plotOptions: {
+            pie: {
+                innerSize: 50,
+                depth: 40
+            }
+        },
+        series: [{
+            name: 'Crew Memebers',
+            data: [
+            {% for x in destiny %}["{{x.destiny_checked}}", {{x.total}}],{% endfor %}
+            ]
+        }]
+    });
+});
+</script>
+{% endblock %}

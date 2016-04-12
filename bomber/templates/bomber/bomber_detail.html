@@ -1,0 +1,159 @@
+{% extends "webpage/base.html" %}
+{% block Titel %}Bomber Details{% endblock %}
+
+{% block scriptHeader %}<!--leafletjs -->
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <style>
+            #map { height: 500px; }
+        </style>
+{% endblock %}
+{% block content %}
+<div class="panel panel-default">
+    <div class="panel-heading"> 
+        <h2>{{ object.plane_type }}<small> {{ object.air_force }} | {{ object.squadron }} | {{ object.bomber_group }} | {{ object.plane_id }} </small></h2>
+    </div>
+    <div class="panel panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3>Aircraft</h3>
+                    </div>
+                    <div class="panel panel-body">
+                        <table class="table table-hover table-condensed">
+                            <tr>
+                                <th class="col-md-3">MACR-Nr</th>
+                                <td class="col-md-9">{{ object.macr_nr }}</td>
+                            </tr>
+                            <tr>
+                                <th>Plane´s Name</th>
+                                <td>{{ object.name|default:"<small>no name provided</small>" }}</td>
+                            </tr>
+                            <tr>
+                                <th>Unit</th>
+                                <td>{{ object.air_force }} | {{ object.squadron }} | {{ object.bomber_group }} | {{ object.plane_id }}</td>
+                            </tr>
+                            <tr>
+                                <th>Crash-Date</th>
+                                <td>{{ object.date_of_crash }}</td>
+                            </tr>
+                            <tr>
+                                <th>Attack Place</th>
+                                <td><a href="{% url 'places:place_edit' pk=object.target_place.id %}">{{ object.target_place }}</a></td>
+                            </tr>
+                            <tr>
+                                <th>last seen (place)</th>
+                                <td><a href="{% url 'places:place_edit' pk=object.last_seen.id %}">{{ object.last_seen }}</a></td>
+                            </tr>
+                            <tr>
+                                <th>last seen (coordinates)</th>
+                                <td>{{ object.lat }}, {{ object.lng }}</td>
+                            </tr>
+                            <tr>
+                                <th>Crahs Place</th>
+                                <td><a href="{% url 'places:place_edit' pk=object.crash_place.id %}">{{ object.crash_place }}</a></td>
+                            </tr>
+                            <tr>
+                                <th>Note</th>
+                                <td>{{ object.comment }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3>Crew</h3>
+                    </div>
+                    <div class="panel panel-body">
+                        <table class="table table-boarderd table-hover table-condensed">
+                            <tr>
+                                <th>Name</th>
+                                <th>Destiny</th>
+                            </tr>
+                            {% for x in crew_list %}
+                            <tr>
+                                <td><a href="{% url 'crew:person_detail' pk=x.id %}">{{ x.last_name }}, {{ x.first_name }}</a> <small>{{ x.rank }}</small></td>
+                                <td>{{ x.destiny_checked }}</td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cold-md-6">
+                <div id="map"></div>
+                <hr/>
+                <div id="donut" style="height: 400px"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+    $('#donut').highcharts({
+        chart: {
+            width: 500,
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45
+            }
+        },
+        title: {
+            text: 'Destiny of the Crew Members'
+        },
+        plotOptions: {
+            pie: {
+                innerSize: 50,
+                depth: 40
+            }
+        },
+        series: [{
+            name: 'Crew Memebers',
+            data: [
+            {% for x in destiny %}["{{x.destiny_checked}}", {{x.total}}],{% endfor %}
+            ]
+        }]
+    });
+});
+</script>
+<script type="text/javascript">
+
+    $( document ).ready(function() {
+        var crash_gps1 = parseFloat("{{ object.crash_place.lat }}")
+        var crash_gps2 = parseFloat("{{ object.crash_place.lng }}")
+        $("#parentMap").append("<div id='map'></div>");
+        var map = L.map('map').setView([crash_gps1, crash_gps2], 8);
+
+        L.tileLayer('http://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpg', {
+        attribution: 'Data, imagery and map information provided by MapQuest, OpenStreetMap <http://www.openstreetmap.org/copyright> and contributors, ODbL <http://wiki.openstreetmap.org/wiki/Legal_FAQ#3a._I_would_like_to_use_OpenStreetMap_maps._How_should_I_credit_you.3F>',
+        maxZoom: 18
+        }).addTo(map);
+
+        L.marker([crash_gps1, crash_gps2]).addTo(map)
+        .bindPopup('Crash Place:  <a href="{% url 'places:place_edit' pk=object.crash_place.id %}">{{ object.crash_place }}</a>');
+
+    {% if object.last_seen.name %}
+        var deathGps1 = parseFloat("{{ object.last_seen.lat }}")
+        var deathGps2 = parseFloat("{{ object.last_seen.lng }}")
+        L.marker([deathGps1, deathGps2]).addTo(map)
+        .bindPopup('Place last seen: <a href="{% url 'places:place_edit' pk=object.last_seen.id %}">{{ object.last_seen }}</a>');
+    {% endif %}
+
+    {% if object.target_place.name %}
+        var deathGps1 = parseFloat("{{ object.target_place.lat }}")
+        var deathGps2 = parseFloat("{{ object.target_place.lng }}")
+        L.marker([deathGps1, deathGps2]).addTo(map)
+        .bindPopup('Attack place: <a href="{% url 'places:place_edit' pk=object.target_place.id %}">{{ object.target_place }}</a>');
+    {% endif %}
+        });
+
+</script>
+
+
+{% endblock %}

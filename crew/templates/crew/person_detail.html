@@ -1,0 +1,91 @@
+{% extends "webpage/base.html" %}
+{% block Titel %}List Places{% endblock %}
+
+{% block scriptHeader %}<!--leafletjs -->
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
+        <style>
+            #map { height: 500px; }
+        </style>
+{% endblock %}
+{% block content %}
+<div class="panel panel-default">
+    <div class="panel-heading"> 
+        <h2><small>{{ object.rank }}</small> {{ object.first_name }} {{ object.last_name }} <small> {{ object.bomber.air_force }} | {{ object.bomber.squadron }} | {{ object.bomber.bomber_group }}
+         </small></h2>
+    </div>
+    <div class="panel panel-body">
+        <div class="row">
+            <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>Details</h3>
+                </div>
+                <div class="panel panel-body">
+                    <table class="table table-hover table-condensed">
+                        <tr>
+                            <th>Bomber</th>
+                            <td>{{object.bomber.plane_type}} <small>(MACR-ID: <a href="{% url 'bombers:bomber_detail' pk=object.bomber.id %}">{{ object.bomber.macr_nr }}</a>)</small></td>
+                        </tr>
+                        <tr>
+                            <th>Place of the crash</th>
+                            <td>{{ object.bomber.crash_place.name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Date of the crash</th>
+                            <td>{{ object.bomber.date_of_crash }}</td>
+                        </tr>
+                        <tr>
+                            <th>Confirmed Destiny</th>
+                            <td>{{ object.destiny_checked }}</td>
+                        </tr>
+                        <tr>
+                            <th>Remark</th>
+                            <td>{{ object.comment }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            </div>
+
+            <div class="cold-md-6">
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $( document ).ready(function() {
+        var crash_gps1 = parseFloat("{{ object.bomber.crash_place.lat }}")
+        var crash_gps2 = parseFloat("{{ object.bomber.crash_place.lng }}")
+        $("#parentMap").append("<div id='map'></div>");
+        var map = L.map('map').setView([crash_gps1, crash_gps2], 8);
+
+        L.tileLayer('http://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpg', {
+        attribution: 'Data, imagery and map information provided by MapQuest, OpenStreetMap <http://www.openstreetmap.org/copyright> and contributors, ODbL <http://wiki.openstreetmap.org/wiki/Legal_FAQ#3a._I_would_like_to_use_OpenStreetMap_maps._How_should_I_credit_you.3F>',
+        maxZoom: 18
+        }).addTo(map);
+
+        L.marker([crash_gps1, crash_gps2]).addTo(map)
+        .bindPopup('crashed in {{ object.bomber.crash_place.name }}');
+
+    {% if object.last_seen.name %}
+        var deathGps1 = parseFloat("{{ object.bomber.last_seen.lat }}")
+        var deathGps2 = parseFloat("{{ object.bomber.last_seen.lng }}")
+        L.marker([deathGps1, deathGps2]).addTo(map)
+        .bindPopup('last seen in {{ object.bomber.last_seen.name }}');
+    {% endif %}
+
+    {% if object.bomber.target_place.name %}
+        var deathGps1 = parseFloat("{{ object.bomber.target_place.lat }}")
+        var deathGps2 = parseFloat("{{ object.bomber.target_place.lng }}")
+        L.marker([deathGps1, deathGps2]).addTo(map)
+        .bindPopup('target place: {{ object.bomber.target_place.name }}');
+    {% endif %}
+        });
+
+</script>
+
+
+{% endblock %}

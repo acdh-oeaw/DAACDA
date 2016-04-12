@@ -1,0 +1,21 @@
+{% extends "webpage/base.html" %}
+{% block Titel %}List Places{% endblock %}
+
+{% block scriptHeader %}<!--leafletjs -->
+    {% load render_table from django_tables2 %}
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
+        <style>
+            #map { height: 500px; }
+        </style>
+{% endblock %}
+{% block content %}
+
+<div class="row">
+    <div class="col-md-8">
+        {% render_table table %}
+    </div>
+    <div class="col-md-4">
+    </div>
+</div>
+{% endblock %}

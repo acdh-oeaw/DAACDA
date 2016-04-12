@@ -1,0 +1,58 @@
+{% extends "webpage/base.html" %}
+{% block Titel %}List Crashed Bombers{% endblock %}
+
+{% block scriptHeader %}<!--leafletjs -->
+    {% load render_table from django_tables2 %}
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
+        <style>
+            #map { height: 500px; }
+        </style>
+{% endblock %}
+{% block content %}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default panel-fixed" >
+            <div class="panel-heading" style="text-align:center;">
+                <h3>Crashed Bombers</h3>
+            </div>
+            <div class="panel-body">    
+                {% render_table table %}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default panel-fixed" >
+            <div class="panel-heading" style="text-align:center;">
+                <h3>All Crash Sites</h3>
+            </div>
+            <div class="panel-body">
+                <div id="parentMap"></div>
+            </div>    
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $( document ).ready(function() {
+        $("#map").remove()
+        $("#parentMap").append("<div id='map'></div>");
+
+        var map = L.map('map').setView([48.69096, 9.14062], 5);
+
+        L.tileLayer('http://otile1.mqcdn.com/tiles/1.0.0/map/{z}/{x}/{y}.jpg', {
+        attribution: 'Data, imagery and map information provided by MapQuest, OpenStreetMap <http://www.openstreetmap.org/copyright> and contributors, ODbL <http://wiki.openstreetmap.org/wiki/Legal_FAQ#3a._I_would_like_to_use_OpenStreetMap_maps._How_should_I_credit_you.3F>',
+        maxZoom: 18
+        }).addTo(map);
+
+        {% for object in object_list %}
+        {% if object.crash_place.lat %}
+        L.marker([{{ object.crash_place.lat }}, {{ object.crash_place.lng }}])
+        .addTo(map)
+        .bindPopup("<h3><a href='{% url "bombers:bomber_detail" pk=object.id %}'>{{ object.macr_nr }}</a></h3> <table class='table table-striped'> <tr> <td>Crashplace: </td> <td>{{ object.crash_place }}</td> </tr> </table>");
+        {% endif %}
+        {% endfor %}
+        });
+</script>
+{% endblock %}

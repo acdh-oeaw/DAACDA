@@ -1,0 +1,13 @@
+{% load autocomplete_light_tags %}
+
+<div class="autocomplete-label">
+{% for choice in choices %}
+<span class="block autocomp_span" replace-text="{{ choice }}" data-value="{{ choice.name }}">
+
+    <b>{{ choice.name }}</b> {{ choice.description }}
+
+    
+</span>
+
+{% endfor %}
+</div>
