@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ["DJANGO_SETTINGS_MODULE"] = "orea.flj.server"
+os.environ["DJANGO_SETTINGS_MODULE"] = "flj.settings.server"
 
 application = get_wsgi_application()
