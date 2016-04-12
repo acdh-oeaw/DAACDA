@@ -1,5 +1,7 @@
 import requests, re, json
-
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.shortcuts import (render, render_to_response, get_object_or_404,
 	redirect)
 from django.views import generic
@@ -16,7 +18,7 @@ class PlaceListView(generic.ListView):
 	def get_queryset(self):
 		return Place.objects.all()
 
-
+@login_required
 def create_place(request):
 	if request.method == "POST":
 		form = PlaceForm(request.POST)
@@ -30,6 +32,7 @@ def create_place(request):
 		return render(request, 'places/edit_places.html', {'form':form})
 
 
+@login_required
 def edit_place(request, pk):
 	instance = Place.objects.get(id=pk)
 	username = "&username=digitalarchiv"
