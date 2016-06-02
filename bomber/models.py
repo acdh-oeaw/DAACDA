@@ -9,7 +9,7 @@ class Bomber(models.Model):
     plane_id = models.CharField(max_length=50, blank=True, verbose_name="The aircraft´s ID")
     name = models.CharField(max_length=250, blank=True, verbose_name="Name of the aircraft")
     bomber_group = models.CharField(max_length=50, blank=True, verbose_name="Bomber Group")
-    squadron = models.IntegerField(null=True, blank=True)
+    squadron = models.CharField(max_length=75, blank=True)
     date_of_crash = models.DateField(blank=True, null=True)
     reason_of_crash = models.CharField(max_length=250, blank=True)
     target_place = models.ForeignKey(Place, blank=True, null=True, related_name="targetPlace")
