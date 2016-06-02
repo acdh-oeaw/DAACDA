@@ -7,3 +7,4 @@ __pycache__
 /flj/settings/local.py
 migrations/
 
+/flj/*.sqlite3
