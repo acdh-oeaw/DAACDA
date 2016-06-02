@@ -37,6 +37,13 @@
           <p><img src="//clarin.oeaw.ac.at/piwik/piwik.php?idsite=24" style="border:0;" alt="" /></p>
         </noscript>
       <!-- End Piwik Code -->
+
+       <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
+        <script type="text/javascript">
+            window.cookieconsent_options = {"message":"This website uses cookies to ensure you get the best experience on our website","dismiss":"Got it!","learnMore":"More info","link":"{% url 'webpage:imprint' %}","theme":"dark-bottom"};
+        </script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script>
+        <!-- End Cookie Consent plugin -->
       {% block scriptHeader %}
         {% endblock %}
   </head>
@@ -62,6 +69,9 @@
                   <ul class="dropdown-menu">
                     <li>
                         <a href="{% url 'webpage:start' %}">Start</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'webpage:imprint' %}">Impressum/Imprint</a>
                     </li>
                   </ul>
                 </li>
@@ -108,14 +118,14 @@
 
     <div class="container text-center">
       <div class="row text-center">
-      <div class="col-sm-6">
+      <!-- <div class="col-sm-6">
           <a href="http://geschichte.uni-graz.at/" class="navlink" target="_blank">
               <img src="{% static 'webpage/img/logo_uni_graz.jpg' %}" alt="Uni Graz" width="50%"/>   
               <p>
                 <strong>History Department University of Graz</strong>
               </p>
           </a>
-        </div>
+        </div> -->
         <div class="col-sm-6">
           <a href="https://acdh.oeaw.ac.at/acdh/" class="navlink" target="_blank">
               <img src="{% static 'webpage/img/logo.png' %}" alt="ACDH" width="25%"/>   
