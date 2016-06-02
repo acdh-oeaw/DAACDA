@@ -5,6 +5,5 @@ __pycache__
 /flj/settings/server_local.py
 /flj/settings/server.py
 /flj/settings/local.py
-migrations/
 
 /flj/*.sqlite3
