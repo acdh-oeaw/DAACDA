@@ -10,16 +10,27 @@
       <meta name="description" content="A Web-App">
       {% endblock %}
       <meta name="author" content="Peter Andorfer">
+      
       <!-- Bootstrap -->
       <link rel="stylesheet" href="{% static 'webpage/libraries/bootstrap335/css/bootstrap.min.css' %}"/></link>
+      
+      <!-- leaflet -->
+        <link rel="stylesheet" href="{% static 'webpage/libraries/leaflet/leaflet.css' %}"/></link>
+        <link rel="stylesheet" href="{% static 'webpage/libraries/leaflet.markercluster/dist/MarkerCluster.css' %}"/></link>
+        <link rel="stylesheet" href="{% static 'webpage/libraries/leaflet.markercluster/dist/MarkerCluster.Default.css' %}"/></link>
+        <script src="{% static 'webpage/libraries/leaflet/leaflet.js' %}"></script>
+        <script src="{% static 'webpage/libraries/leaflet.markercluster/src/leaflet.markercluster-src.js' %}"></script>
+      <!-- leaflet end  -->
+
       <!--scroll to top CSS -->
-      <link rel="stylesheet" href="{% static 'webpage/libraries/scroll-to-top/css/ap-scroll-top.min.css'%}"></link>
+        <link rel="stylesheet" href="{% static 'webpage/libraries/scroll-to-top/css/ap-scroll-top.min.css'%}"></link>
+
       <!-- jQuery -->
-      <script type="text/javascript" src="{% static 'webpage/libraries/jquery/jquery.js' %}"></script>
-      <!-- angular.js -->
-     <!--  <script type="text/javascript" src="{% static 'webpage/libraries/angularjs/angular.min.js' %}"></script> -->
+        <script type="text/javascript" src="{% static 'webpage/libraries/jquery/jquery.js' %}"></script>
+
       <!--scroll to top -->
-      <script src="{% static 'webpage/libraries/scroll-to-top/js/ap-scroll-top.min.js'%}"></script>
+        <script src="{% static 'webpage/libraries/scroll-to-top/js/ap-scroll-top.min.js'%}"></script>
+
       <!-- Piwik -->
         <script type="text/javascript">
           var _paq = _paq || [];
@@ -44,6 +55,7 @@
         </script>
         <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script>
         <!-- End Cookie Consent plugin -->
+        
         <style type="text/css">
            footer {
               flex: 0 0 auto;

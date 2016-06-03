@@ -5,3 +5,4 @@ __pycache__
 /flj/settings/local.py
 
 /flj/*.sqlite3
+/.ipynb_checkpoints
