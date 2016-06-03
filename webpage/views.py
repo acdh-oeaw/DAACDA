@@ -16,6 +16,11 @@ def start_view(request):
     return render(request, 'webpage/index.html', context)
 
 
+def about_view(request):
+    context = RequestContext(request)
+    return render(request, 'webpage/about.html', context)
+
+
 #################################################################
 #               views for login/logout                          #
 #################################################################
