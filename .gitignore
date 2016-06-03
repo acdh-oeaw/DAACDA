@@ -1,7 +1,5 @@
 *.pyc
 __pycache__
-/webpage/static/webpage/libraries
-/webpage/static/webpage/libraries_all
 /flj/settings/server_local.py
 /flj/settings/server.py
 /flj/settings/local.py
