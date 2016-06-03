@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'places/', include('places.urls', namespace='places')),
     url(r'labels/', include('labels.urls', namespace='labels')),
     url(r'bombers/', include('bomber.urls', namespace='bombers')),
+    url(r'browsing/', include('browsing.urls', namespace='browsing')),
     url(r'crew/', include('crew.urls', namespace='crew')),
     url(r'^autocomplete/', include('autocomplete_light.urls')),
 ]
