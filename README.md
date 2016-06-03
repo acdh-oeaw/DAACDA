@@ -1,5 +1,5 @@
-# DAAC-DB
-Downed Allied Air Crew Database Austria. A web application. 
+# DAACDA
+**D**owned **A**llied **A**ir **C**rew **D**atabase **A**ustria. A web application. 
 
 ## About
 This is the repository of the web application [Downed Allied Air Crew Database Austria](http://flj.eos.arz.oeaw.ac.at/). The application’s purpose is the publication of data about allied air crews whose planes were downed above Austria during WW II. The data running this application was gathered by Georg Hoffmann and Nicole Goll. For more information please refere to [Hoffmann, Fliegerlynchjusitz, 2015](https://www.schoeningh.de/katalog/titel/978-3-506-78137-6.html) or [Goll/Hoffmann, Missing in Action, 2016](http://www.bundesheer.at/download_archiv/pdfs/missing_in_action.pdf). 
