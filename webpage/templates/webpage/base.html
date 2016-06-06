@@ -127,13 +127,26 @@
                   </a>
                   <ul class="dropdown-menu">
                     <li>
+                        <a href="{%url 'bombers:bomber_list' %}">Crashed Aircrafts</a>
+                    </li>
+                    <li>
+                        <a href="{%url 'crew:person_list' %}">The Crews</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'api-root' %}">API</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Filter and Search
+                  <span class="caret"/>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li>
                         <a href="{%url 'browsing:browse_bombers' %}">Crashed Aircrafts</a>
                     </li>
                     <li>
                         <a href="{%url 'browsing:browse_persons' %}">The Crews</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'api-root' %}">API</a>
                     </li>
                   </ul>
                 </li>
