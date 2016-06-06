@@ -25,6 +25,7 @@ notebook==4.0.6
 path.py==8.1.2
 pickleshare==0.5
 Pygments==2.0.2
+pytz==2016.4
 pyzmq==15.1.0
 requests==2.8.1
 simplegeneric==0.8.1

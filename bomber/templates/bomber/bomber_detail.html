@@ -56,6 +56,10 @@
                                 <td><a href="{% url 'places:place_edit' pk=object.crash_place.id %}">{{ object.crash_place }}</a></td>
                             </tr>
                             <tr>
+                                <th>Reason of the crash</th>
+                                <td>{{ object.reason_of_crash }}</a></td>
+                            </tr>
+                            <tr>
                                 <th>Note</th>
                                 <td>{{ object.comment }}</td>
                             </tr>

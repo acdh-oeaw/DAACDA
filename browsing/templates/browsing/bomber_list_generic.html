@@ -1,8 +1,26 @@
 {% extends "browsing/generic_list.html" %}
+{% block Titel %} See all Bombers{% endblock %}
 {% block list_title %}Browse Bombers{% endblock %}
 
 {% block reset_button %}
+ <a class ="btn btn-default"  href="{% url 'browsing:browse_bombers' %}">Reset search</a>   
 {% endblock %}
 
 {% block customScripts %}
+<script>
+    var crash_places = [{% for name in crash_places %} "{{ name }}", {% endfor %}];
+    var target_places = [{% for name in target_places %} "{{ name }}", {% endfor %}];
+
+    $(function() {
+        $("#id_crash_place__name").autocomplete({
+            source:crash_places
+        }); 
+    });
+
+     $(function() {
+        $("#id_target_place__name").autocomplete({
+            source:target_places
+        }); 
+    });
+</script>
 {% endblock %}

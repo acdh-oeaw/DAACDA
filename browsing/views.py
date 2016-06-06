@@ -1,9 +1,19 @@
 from django_tables2 import SingleTableView, RequestConfig
 from bomber.models import Bomber
-from places.models import *
-from .filters import BomberListFilter
+from crew.models import Person
+from places.models import Place
+from .filters import BomberListFilter, PersonListFilter
 from .forms import GenericFilterFormHelper
-from .tables import BomberTable
+from .tables import BomberTable, PersonTable
+
+
+def get_autocompomplete_places(ClassName, field_name):
+    """ helper function to return name values of Place objects """
+    return_list = []
+    for x in ClassName.objects.values(field_name):
+            place = Place.objects.get(id=x[field_name])
+            return_list.append(place.name)
+    return list(set(return_list))
 
 
 class GenericListView(SingleTableView):
@@ -30,6 +40,19 @@ class GenericListView(SingleTableView):
         return context
 
 
+class PersonListView(GenericListView):
+    model = Person
+    table_class = PersonTable
+    template_name = 'browsing/person_list_generic.html'
+    filter_class = PersonListFilter
+    formhelper_class = GenericFilterFormHelper
+
+    def get_context_data(self, **kwargs):
+        context = super(GenericListView, self).get_context_data()
+        context[self.context_filter_name] = self.filter
+        return context
+
+
 class BomberListView(GenericListView):
     model = Bomber
     table_class = BomberTable
@@ -40,16 +63,17 @@ class BomberListView(GenericListView):
     def get_context_data(self, **kwargs):
         context = super(GenericListView, self).get_context_data()
         context[self.context_filter_name] = self.filter
-        # edition_names = []
-        # for edition in Bomber.objects.all():
-        #     edition_names.append(edition.name)
-        # context["edition_names"] = set(edition_names)
-        # manager_names = []
-        # for person in Person.objects.all():
-        #     manager_names.append(person.name)
-        # context["manager_names"] = set(manager_names)
-        # institution_names = []
-        # for inst in Institution.objects.all():
-        #     institution_names.append(inst.name)
-        # context["institution_names"] = set(institution_names)
+        qs = super(GenericListView, self).get_queryset()
+        self.filter = self.filter_class(self.request.GET, queryset=qs)
+        self.filter.form.helper = self.formhelper_class()
+        crash_places = []
+        for x in self.filter.qs.values('crash_place'):
+            place = Place.objects.get(id=x['crash_place'])
+            crash_places.append(place.name)
+        context['crash_places'] = list(set(crash_places))
+        target_places = []
+        for x in self.filter.qs.values('target_place'):
+            place = Place.objects.get(id=x['target_place'])
+            target_places.append(place.name)
+        context['target_places'] = list(set(target_places))
         return context
