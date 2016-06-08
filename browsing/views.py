@@ -4,7 +4,8 @@ from crew.models import Person
 from places.models import Place
 from .filters import BomberListFilter, PersonListFilter
 from .forms import GenericFilterFormHelper
-from .tables import BomberTable, PersonTable
+from bomber.tables import BomberTable
+from crew.tables import PersonTable
 
 
 def get_autocompomplete_places(ClassName, field_name):

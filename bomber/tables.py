@@ -5,11 +5,10 @@ from .models import Bomber
 
 class BomberTable(tables.Table):
     macr_nr = tables.LinkColumn('bombers:bomber_detail', args=[A('pk')])
-    crash_place = tables.LinkColumn('places:place_edit', args=[A('crash_place.id')])
-# unit = tables.TemplateColumn('{{ record.bomber_group }} | {{ record.squadron }}')
+    crash_place = tables.LinkColumn(
+        'places:place_edit', args=[A('crash_place.id')], order_by="crash_place.name")
 
     class Meta:
         model = Bomber
         fields = ("macr_nr", "date_of_crash", "crash_place")
-#        exclude = ("comment", "lat", "lng", "last_seen", "target_place", "id", "name", "plane_id",)
         attrs = {"class": "table table-boarderd table-hover"}
