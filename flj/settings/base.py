@@ -19,6 +19,43 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
+# Application definition
+
+INSTALLED_APPS = [
+    'autocomplete_light',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django_extensions',
+    'django_tables2',
+    'django_filters',
+    'django_spaghetti',
+    'crispy_forms',
+    'rest_framework',
+    'webpage',
+    'places',
+    'labels',
+    'crew',
+    'bomber',
+    'browsing',
+]
+
+
+REST_FRAMEWORK = {'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticatedOrReadOnly',),
+    'PAGE_SIZE': 10
+}
+
+
+SPAGHETTI_SAUCE = {
+    'apps': ['places', 'labels', 'crew', 'bomber'],
+    'show_fields': False,
+    'exclude': {'auth': ['user']}
+}
+
+
 ALLOWED_HOSTS = []
 
 

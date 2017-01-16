@@ -1,8 +1,17 @@
+# Byte-compiled
+__pycache__/
 *.pyc
-__pycache__
-/flj/settings/server_local.py
-/flj/settings/server.py
-/flj/settings/local.py
 
-/flj/*.sqlite3
-/.ipynb_checkpoints
+#Ipython Notebook
+.ipynb_checkpoints
+
+/db.sqlite3
+/flj/settings/mysql.py
+/flj/settings/server_local.py
+/flj/settings/postgres.py
+/flj/settings/server.py
+/playAndTry.ipynb
+/flj/db.sqlite3
+
+/mysqlclient-1.3.9-cp35-cp35m-win_amd64.whl
+/Untitled.ipynb

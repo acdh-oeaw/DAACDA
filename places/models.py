@@ -2,14 +2,6 @@ from django.db import models
 from labels.models import Label
 
 
-class AlternativeName(models.Model):
-    name = models.CharField(
-        max_length=250, blank=True, help_text="Alternative Name")
-
-    def __str__(self):
-        return self.name
-
-
 class Place(models.Model):
 
     """Holds information about places."""
