@@ -1,10 +1,12 @@
 # DAACDA
+
 **D**owned **A**llied **A**ir **C**rew **D**atabase **A**ustria. A web application.
 
 ## About
-This is the repository of the web application [Downed Allied Air Crew Database Austria](http://daacda.eos.arz.oeaw.ac.at/). The application’s purpose is the publication of data about allied air crews whose planes were downed above Austria during WW II. The data running this application was gathered by Georg Hoffmann and Nicole Goll. For more information please refere to [Hoffmann, Fliegerlynchjustiz, 2015](https://www.schoeningh.de/katalog/titel/978-3-506-78137-6.html) or [Goll/Hoffmann, Missing in Action, 2016](http://www.bundesheer.at/download_archiv/pdfs/missing_in_action.pdf). 
+This is the repository of the web application [Downed Allied Air Crew Database Austria](http://daacda.eos.arz.oeaw.ac.at/). The application’s purpose is the publication of data about allied air crews whose planes were downed above Austria during WW II. The data running this application was gathered by Georg Hoffmann and Nicole Goll. For more information please refere to [Hoffmann, Fliegerlynchjustiz, 2015](https://www.schoeningh.de/katalog/titel/978-3-506-78137-6.html) or [Goll/Hoffmann, Missing in Action, 2016](http://www.bundesheer.at/download_archiv/pdfs/missing_in_action.pdf).
 
 ## Install
+
 The application was built with Python 3.4.
 
 1. clone the repo
@@ -14,12 +16,12 @@ The application was built with Python 3.4.
 5. browse to http://127.0.0.1:8000/
 
 ## Upload the data
-To fetch the last version of the catalogue data, you have to execute the ipython scripts
+To import data, you have to execute the ipython scripts
 * `importBomber.ipynb` and
 * `importCrew.ipynb`
 
 To do so:
-1. Start a new ipython session `python manage.py shell_plus --notebook --settings=flj.settings.test`,
+1. Start a new ipython session `python manage.py shell_plus --notebook --settings=flj.settings.test`, (if you haven't done so, install the needed packages, e.g. `pip install -r requirements_notebook.txt`)
 2. open `importBomber.ipynb` and execute the script cell by cell.
 3. Then open `importCrew.ipynb`and execute the script cell by cell.
 
