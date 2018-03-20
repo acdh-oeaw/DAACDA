@@ -8,7 +8,7 @@ This is the repository of the web application [Downed Allied Air Crew Database A
 The application was built with Python 3.4.
 
 1. clone the repo
-2. create a virtual environment and run install the required packages `pip install > requirements`
+2. create a virtual environment and run install the required packages `pip install -r requirements`
 3. makemigrations and migrate `python manage.py makemigrations`and `python manage.py migrate`
 4. start the dev-server `python manage.py runserver --settings=flj.settings.test`
 5. browse to http://127.0.0.1:8000/
