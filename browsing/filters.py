@@ -23,8 +23,11 @@ def generated_choices(ClassName, field_name):
     """returns the values of the field in a list of tuples"""
     return_choices = []
     picked_valued = ClassName.objects.values(field_name)
-    for x in picked_valued:
-        return_choices.append((x[field_name], x[field_name]))
+    try:
+        for x in picked_valued:
+            return_choices.append((x[field_name], x[field_name]))
+    except:
+        return_choices.append(('dummy value', 'dummy value'))
     return list(set(return_choices))
 
 
