@@ -21,6 +21,11 @@ def about_view(request):
     return render(request, 'webpage/about.html', context)
 
 
+def team(request):
+    context = RequestContext(request)
+    return render(request, 'webpage/team.html', context)
+
+
 #################################################################
 #               views for login/logout                          #
 #################################################################

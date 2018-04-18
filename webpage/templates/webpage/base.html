@@ -10,12 +10,12 @@
       <meta name="description" content="A Web-App">
       {% endblock %}
       <meta name="author" content="Peter Andorfer">
-      
+
       <!-- Bootstrap -->
       <link rel="stylesheet" href="{% static 'webpage/libraries/bootstrap335/css/bootstrap.min.css' %}"/></link>
       <!-- jQuery UI -->
       <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css"/>
-      
+
       <!-- leaflet -->
         <link rel="stylesheet" href="{% static 'webpage/libraries/leaflet/leaflet.css' %}"/></link>
         <link rel="stylesheet" href="{% static 'webpage/libraries/leaflet.markercluster/dist/MarkerCluster.css' %}"/></link>
@@ -84,7 +84,7 @@
           right: 0;
           width: 100%;
           margin-top: 10px;
-          }       
+          }
         </style>
         {% block scriptHeader %}
         {% endblock %}
@@ -101,7 +101,7 @@
             <span class="icon-bar"/>
             <span class="icon-bar"/>
           </button>
-        </div>  
+        </div>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
@@ -115,6 +115,9 @@
                     </li>
                     <li>
                         <a href="{% url 'webpage:about' %}">About</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'webpage:team' %}">Team</a>
                     </li>
                     <li>
                         <a href="{% url 'datamodel:plate' %}">Data Model</a>
@@ -176,7 +179,7 @@
     </header>
     <section class="main-content">
         <div class="alert alert-warning">
-            <strong>Warning!</strong> Work in Progress. But entered data will be preserved.<a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+        A <a href="{% url 'webpage:about' %}"><strong>new version</strong></a> of DAACDA is being developed. Work in Progress, but entered data will be preserved.<a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
         </div>
         <div id="content" class="container">
             {% block content %}
@@ -189,17 +192,17 @@
         <div class="row text-center">
           <div class="col-sm-4">
             <a href="https://acdh.oeaw.ac.at/acdh/" class="navlink" target="_blank">
-                <img src="{% static 'webpage/img/ACDH_kurz_Weiss.png' %}" alt="ACDH" width="25%"/>   
+                <img src="{% static 'webpage/img/ACDH_kurz_Weiss.png' %}" alt="ACDH" width="25%"/>
             </a>
           </div>
           <div class="col-sm-4">
             <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="navlink" target="_blank">
-                <img src="{% static 'webpage/img/by-sa.png' %}" alt="CC-BY-SA-4.0" width="25%"/>                 
+                <img src="{% static 'webpage/img/by-sa.png' %}" alt="CC-BY-SA-4.0" width="25%"/>
             </a>
           </div>
           <div class="col-sm-4">
             <a href="https://github.com/acdh-oeaw/DAACDA" class="navlink" target="_blank">
-                <img src="{% static 'webpage/img/GitHub-Mark-Light-64px.png' %}" alt="ACDH" width="10%"/>   
+                <img src="{% static 'webpage/img/GitHub-Mark-Light-64px.png' %}" alt="ACDH" width="10%"/>
             </a>
           </div>
         </div>
@@ -210,7 +213,7 @@
     <script type="text/javascript" src="{% static 'webpage/libraries/bootstrap335/js/bootstrap.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'webpage/libraries/bootstrap335/js/bootstrap-tab.js' %}"></script>
     <script type="text/javascript" src="{% static 'webpage/libraries/jquery-ui-1.11.4/jquery-ui.min.js' %}"></script>
-    <!-- scroll-up-bottom -->        
+    <!-- scroll-up-bottom -->
     <script type="text/javascript">
             // Setup plugin with default settings
             $(document).ready(function() {
@@ -220,7 +223,7 @@
                     }
                 });
             });
-    </script>    
+    </script>
     {% endblock %}
   </body>
 </html>
